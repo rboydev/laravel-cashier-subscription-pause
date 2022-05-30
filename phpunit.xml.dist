@@ -10,8 +10,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
->
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd">
     <coverage>
         <include>
             <directory suffix=".php">src/</directory>
@@ -32,6 +31,7 @@
         <env name="DB_DATABASE" value="homestead" />
         <env name="DB_USERNAME" value="homestead" />
         <env name="DB_PASSWORD" value="secret" />
+        <env name="STRIPE_SECRET" value="" />
     </php>
     <logging>
         <junit outputFile="build/report.junit.xml"/>
