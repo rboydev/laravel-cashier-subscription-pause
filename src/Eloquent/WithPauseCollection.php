@@ -18,7 +18,7 @@ interface WithPauseCollection
      *
      * @return static
      */
-    public function syncStripePauseCollection(): static;
+    public function syncStripePauseCollection();
 
     /**
      * Pause subscription.
@@ -31,7 +31,7 @@ interface WithPauseCollection
      * @throws \LogicException
      * @throws \Stripe\Exception\ApiErrorException
      */
-    public function pause(string $behavior, ?Carbon $resumesAt = null): static;
+    public function pause(string $behavior, Carbon $resumesAt = null);
 
     /**
      * Pause with behavior mark_uncollectible.
@@ -40,7 +40,7 @@ interface WithPauseCollection
      *
      * @return $this
      */
-    public function pauseBehaviorMarkUncollectible(?Carbon $resumesAt = null): static;
+    public function pauseBehaviorMarkUncollectible(Carbon $resumesAt = null);
 
     /**
      * Pause with behavior keep_as_draft.
@@ -49,7 +49,7 @@ interface WithPauseCollection
      *
      * @return $this
      */
-    public function pauseBehaviorKeepAsDraft(?Carbon $resumesAt = null): static;
+    public function pauseBehaviorKeepAsDraft(Carbon $resumesAt = null);
 
     /**
      * Pause with behavior void.
@@ -58,7 +58,7 @@ interface WithPauseCollection
      *
      * @return $this
      */
-    public function pauseBehaviorVoid(?Carbon $resumesAt = null): static;
+    public function pauseBehaviorVoid(Carbon $resumesAt = null);
 
     /**
      * Resume the paused subscription.
@@ -68,7 +68,7 @@ interface WithPauseCollection
      * @throws \LogicException
      * @throws \Stripe\Exception\ApiErrorException
      */
-    public function unpause(): static;
+    public function unpause();
 
     /**
      * Check is current subscription paused.
@@ -77,7 +77,7 @@ interface WithPauseCollection
      *
      * @return bool
      */
-    public function paused(?string $behavior = null): bool;
+    public function paused(string $behavior = null);
 
     /**
      * Check is current subscription not paused.
@@ -86,7 +86,7 @@ interface WithPauseCollection
      *
      * @return bool
      */
-    public function notPaused(?string $behavior = null): bool;
+    public function notPaused(string $behavior = null);
 
     /**
      * Get auto pause resumes timestamp.
@@ -95,7 +95,7 @@ interface WithPauseCollection
      *
      * @return string|null
      */
-    public function pauseResumesAtTimestamp(?string $behavior = null): ?string;
+    public function pauseResumesAtTimestamp(string $behavior = null);
 
     /**
      * Get auto pause resumes datetime.
@@ -104,5 +104,5 @@ interface WithPauseCollection
      *
      * @return Carbon|null
      */
-    public function pauseResumesAt(?string $behavior = null): ?Carbon;
+    public function pauseResumesAt(string $behavior = null);
 }

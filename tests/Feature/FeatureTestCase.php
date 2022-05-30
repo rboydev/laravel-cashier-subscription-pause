@@ -37,7 +37,7 @@ abstract class FeatureTestCase extends TestCase
         parent::setUp();
     }
 
-    protected function createCustomer($description = 'taylor', array $options = []): User
+    protected function createCustomer($description = 'taylor', array $options = [])
     {
         return User::create(array_merge([
             'email'    => "{$description}@cashier-test.com",

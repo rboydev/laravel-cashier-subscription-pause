@@ -16,7 +16,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function pause(string $behavior, ?Carbon $resumesAt = null): static
+    public function pause(string $behavior, Carbon $resumesAt = null)
     {
         if ($this->cancelled()) {
             throw new LogicException('Unable to pause subscription that is cancelled.');
@@ -38,7 +38,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function pauseBehaviorMarkUncollectible(?Carbon $resumesAt = null): static
+    public function pauseBehaviorMarkUncollectible(Carbon $resumesAt = null)
     {
         return $this->pause(WithPauseCollection::BEHAVIOR_MARK_UNCOLLECTIBLE, $resumesAt);
     }
@@ -46,7 +46,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function pauseBehaviorKeepAsDraft(?Carbon $resumesAt = null): static
+    public function pauseBehaviorKeepAsDraft(Carbon $resumesAt = null)
     {
         return $this->pause(WithPauseCollection::BEHAVIOR_KEEP_AS_DRAFT, $resumesAt);
     }
@@ -54,7 +54,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function pauseBehaviorVoid(?Carbon $resumesAt = null): static
+    public function pauseBehaviorVoid(Carbon $resumesAt = null)
     {
         return $this->pause(WithPauseCollection::BEHAVIOR_VOID, $resumesAt);
     }
@@ -62,7 +62,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function unpause(): static
+    public function unpause()
     {
         if (!$this->paused()) {
             throw new LogicException('Unable to unpause subscription that is not paused.');
@@ -80,11 +80,11 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function syncStripePauseCollection(): static
+    public function syncStripePauseCollection()
     {
         $subscription = $this->asStripeSubscription();
 
-        $this->pause_collection = $subscription->pause_collection?->toArray();
+        $this->pause_collection = optional($subscription->pause_collection)->toArray();
         $this->save();
 
         return $this;
@@ -93,7 +93,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function paused(?string $behavior = null): bool
+    public function paused(?string $behavior = null)
     {
         $hasBehavior = is_array($this->pause_collection) && !empty($this->pause_collection['behavior']);
         if ($behavior) {
@@ -111,7 +111,7 @@ trait UsesPauseCollection
      *
      * @return Builder
      */
-    public function scopePaused($query, ?string $behavior = null): Builder
+    public function scopePaused($query, string $behavior = null)
     {
         if (!$behavior) {
             return $query->whereNotNull('pause_collection')
@@ -125,7 +125,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function notPaused(?string $behavior = null): bool
+    public function notPaused(string $behavior = null)
     {
         return !$this->paused($behavior);
     }
@@ -138,7 +138,7 @@ trait UsesPauseCollection
      *
      * @return Builder
      */
-    public function scopeNotPaused($query, ?string $behavior = null): Builder
+    public function scopeNotPaused($query, string $behavior = null)
     {
         if (!$behavior) {
             return $query->where(function ($query) {
@@ -158,7 +158,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function pauseResumesAtTimestamp(?string $behavior = null): ?string
+    public function pauseResumesAtTimestamp(string $behavior = null)
     {
         if (!$this->paused($behavior) || empty($this->pause_collection['resumes_at'])) {
             return null;
@@ -170,7 +170,7 @@ trait UsesPauseCollection
     /**
      * @inerhitDoc
      */
-    public function pauseResumesAt(?string $behavior = null): ?Carbon
+    public function pauseResumesAt(string $behavior = null)
     {
         if ($timestamp = $this->pauseResumesAtTimestamp($behavior)) {
             return Carbon::createFromTimestamp($timestamp);

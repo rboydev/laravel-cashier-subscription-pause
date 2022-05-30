@@ -47,7 +47,7 @@ class StripeTestProxy
         }
     }
 
-    public function stripe(array $options = []): StripeClient
+    public function stripe(array $options = [])
     {
         return Cashier::stripe(array_merge([ 'api_key' => getenv('STRIPE_SECRET') ], $options));
     }
