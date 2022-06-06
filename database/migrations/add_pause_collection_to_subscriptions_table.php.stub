@@ -8,11 +8,7 @@ class AddPauseCollectionToSubscriptionsTable
     extends Migration {
 
     protected function getTableName() {
-        $modelClass = \Laravel\Cashier\Cashier::$subscriptionModel;
-        /** @var \Illuminate\Database\Eloquent\Model $model */
-        $model = new $modelClass;
-
-        return $model->getTable();
+        return 'subscriptions';
     }
 
     public function up() {

@@ -26,7 +26,10 @@ trait UsesPauseCollection
         if ($resumesAt) {
             $payload['resumes_at'] = $resumesAt->timestamp;
         }
-        $stripeSubscription = $this->updateStripeSubscription([ 'pause_collection' => $payload, ]);
+
+        $stripeSubscription = $this->owner->stripe()->subscriptions->update(
+            $this->stripe_id, [ 'pause_collection' => $payload]
+        );
 
         $this->fill([
             'pause_collection' => $stripeSubscription->pause_collection,
@@ -68,7 +71,9 @@ trait UsesPauseCollection
             throw new LogicException('Unable to unpause subscription that is not paused.');
         }
 
-        $stripeSubscription = $this->updateStripeSubscription([ 'pause_collection' => '', ]);
+        $stripeSubscription = $this->owner->stripe()->subscriptions->update(
+            $this->stripe_id, [ 'pause_collection' => '', ]
+        );
 
         $this->fill([
             'pause_collection' => $stripeSubscription->pause_collection,

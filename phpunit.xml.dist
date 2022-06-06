@@ -28,10 +28,10 @@
     </testsuites>
     <php>
         <env name="USE_MYSQL" value="true" />
-        <env name="DB_DATABASE" value="homestead" />
+        <env name="DB_DATABASE" value="laravel-starter" />
         <env name="DB_USERNAME" value="homestead" />
         <env name="DB_PASSWORD" value="secret" />
-        <env name="STRIPE_SECRET" value="" />
+        <env name="STRIPE_SECRET" value="sk_test_51IMzdTD6exWV0Rv0jWOTesM1O65tER4VOcz8vzdpSALY5oMTWFGc0L08xgVyLcVMZU1W4f3AzDCQJ9GIzP4TCb7Z00S82qRyPh" />
     </php>
     <logging>
         <junit outputFile="build/report.junit.xml"/>
