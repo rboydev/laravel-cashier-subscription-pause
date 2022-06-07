@@ -70,7 +70,7 @@ trait UsesPauseCollection
             throw new LogicException('Unable to unpause subscription that is not paused.');
         }
 
-        $stripeSubscription = $this->owner->stripe()->subscriptions->update(
+        $stripeSubscription = $this->owner->currentSubscription()->asStripeSubscription()->update(
             $this->stripe_id, [ 'pause_collection' => '', ]
         );
 
