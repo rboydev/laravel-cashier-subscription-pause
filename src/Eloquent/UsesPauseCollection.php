@@ -12,7 +12,6 @@ use LogicException;
  */
 trait UsesPauseCollection
 {
-
     /**
      * @inerhitDoc
      */
@@ -27,7 +26,7 @@ trait UsesPauseCollection
             $payload['resumes_at'] = $resumesAt->timestamp;
         }
 
-        $stripeSubscription = $this->owner->stripe()->subscriptions->update(
+        $stripeSubscription = $this->owner->currentSubscription()->asStripeSubscription()->update(
             $this->stripe_id, [ 'pause_collection' => $payload]
         );
 
